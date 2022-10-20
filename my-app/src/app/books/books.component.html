@@ -1,0 +1,19 @@
+<h1>Libros!</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 mb-4" *ngFor="let book of books">
+            <div class="card">
+                <a class="img-card">
+                    <img src={{book.image}} />
+                </a>
+                <div class="card-content">
+                    <h4 class="card-title">
+                        <a> {{book.name}} </a>
+                    </h4> 
+                    <strong class="">ID: </strong> {{book.id}} <br>
+                    <strong class=""> Editorial: </strong> {{book.editorial}} <br>
+                    <p class=""> {{book.description}} </p>
+                </div>
+            </div>
+        </div>
+</div>
