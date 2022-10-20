@@ -1,4 +1,4 @@
-import { Editorial } from './editorial';
+import { Editorial } from './editorial/editorial';
 
 describe('Editorial', () => {
   it('should create an instance', () => {
