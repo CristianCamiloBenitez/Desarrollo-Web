@@ -1,6 +1,3 @@
-// Java Program to Demonstrate Department File
-
-// Importing package module to this code fragment
 package co.edu.javeriana.libreria.entity;
 
     import javax.persistence.*;

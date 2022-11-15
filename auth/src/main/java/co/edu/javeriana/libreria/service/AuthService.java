@@ -42,11 +42,11 @@ public class AuthService {
         user.setUsername(username);
         user.setPassword(pwd);
         user.setToken(token);
-// -------------
-        if (userRepository.findById(Integer.valueOf(username)).isEmpty())
+
+        if (userRepository.findById(username).isEmpty())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "username doesent exist");
 
-        if (userRepository.findById(Integer.valueOf(username)).get().getPassword().equals(pwdHash)) {
+        if (userRepository.findById(username).get().getPassword().equals(pwdHash)) {
             return user;
         } else
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wrong login parameters");
