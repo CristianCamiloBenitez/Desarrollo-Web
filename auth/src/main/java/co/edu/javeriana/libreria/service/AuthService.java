@@ -31,10 +31,10 @@ public class AuthService {
     private UserRepository userRepository;
 
     // POST
-    public co.edu.javeriana.libreria.dto.User login(String username, String pwd) throws Exception {
+    public User login(String username, String pwd) throws Exception {
 
         String token = getJWTToken(username);
-        co.edu.javeriana.libreria.dto.User user = new User();
+        User user = new User();
 
         String pwdPlain = decrypt(pwd);
         String pwdHash = getHash(pwdPlain);
@@ -42,11 +42,11 @@ public class AuthService {
         user.setUsername(username);
         user.setPassword(pwd);
         user.setToken(token);
-
-        if (userRepository.findById(username).isEmpty())
+// -------------
+        if (userRepository.findById(Integer.valueOf(username)).isEmpty())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "username doesent exist");
 
-        if (userRepository.findById(username).get().getPassword().equals(pwdHash)) {
+        if (userRepository.findById(Integer.valueOf(username)).get().getPassword().equals(pwdHash)) {
             return user;
         } else
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wrong login parameters");
