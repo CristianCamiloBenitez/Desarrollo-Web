@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../login.service'
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -28,15 +29,29 @@ export class LoginComponent implements OnInit {
       let passParam: string;
       userParam = ''+this.checkoutForm.value.login;
       passParam = ''+this.checkoutForm.value.password;
-      console.log('FormValue:', this.checkoutForm.value);
-      console.log('Login:', this.checkoutForm.value.login);
-      console.log('Password:', this.checkoutForm.value.password);
       this.loginService.login(userParam, passParam).subscribe(
-                          data => {
-                                    console.log(data);
-                                    this.loginService.setToken(data.token);
-                                    this.router.navigateByUrl('/');
-                                  });
+        data => {
+          console.log(data);
+          this.loginService.setToken(data.token);
+          this.loginService.setUser(data.username)
+          Swal.fire({
+            icon: 'success',
+            title: 'Inicio de sesión correcto',
+            text: 'Bienvenido, ' + data.username,
+            confirmButtonColor: '#50504f'
+          });
+          this.router.navigateByUrl('/');
+          this.loginService.getStatus.emit("login");
+        },
+        error => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error al iniciar sesión',
+            text: 'Verifica usuario y/o contraseña',
+            confirmButtonColor: '#50504f'
+          });
+        });
+  
       this.checkoutForm.reset();
   }
 

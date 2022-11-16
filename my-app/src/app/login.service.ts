@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from "rxjs";
 import { CookieService } from "ngx-cookie-service";
@@ -8,6 +8,7 @@ import { CookieService } from "ngx-cookie-service";
 })
 export class LoginService {
 
+  @Output() getStatus: EventEmitter<any> = new EventEmitter();
   constructor(private http: HttpClient,
               private cookies: CookieService) { }
 
@@ -17,7 +18,7 @@ export class LoginService {
       const params = new HttpParams()
         .set('user', user)
         .set('password', password)
-      return this.http.post("http://localhost:8082/user", body, {
+      return this.http.post("http://localhost:8083/users", body, {
                             params: params
                             });
   }
@@ -36,5 +37,6 @@ export class LoginService {
   }
   logout() {
     this.cookies.deleteAll();
+    this.getStatus.emit("logout");
   }
 }

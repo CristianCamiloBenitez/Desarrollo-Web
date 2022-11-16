@@ -22,6 +22,21 @@ export class BooksComponent implements OnInit {
       }
     );
 
+    this.editorialService.getEditorials().subscribe(
+      editoriales => {
+        this.editoriales = editoriales;
+      }
+    )
+
+  }
+
+  getEditorial(id: Number): string {
+    for(let item of this.editoriales) {
+      if(item.id === id) {
+          return item.name;
+      }
+    }
+    return "---"; 
   }
 
 }
