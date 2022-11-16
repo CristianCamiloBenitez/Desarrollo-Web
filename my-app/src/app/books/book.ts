@@ -1,9 +1,10 @@
 import {Editorial} from '../editorial/editorial'
 
 export interface Book {
-    id: number;
-    name: string;
-    description: string;
-    image: string;
+    Id: number;
+    Name: string;
+    Description: string;
+    imageUrl: string;
+    author:string;
     editorial: Editorial;
 }
