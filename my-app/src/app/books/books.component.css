@@ -1,1 +1,53 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
+
+html,
+
+body{
+    height: 100%;
+    width: 100%;
+    background: plum;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.wrapper {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.card {
+    display: block;
+    margin-bottom: 10px;
+    background-color: burlywood;
+}
+
+.img-card {
+    width: 100%;
+    height: 300px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    display: block;
+    overflow: hidden;
+}
+
+.img-card img {
+    width: 50%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 15px;
+    text-align: left;
+}
+
+.card-title {
+    margin-top: 0px;
+    font-weight: 700;
+    font-size: 1.65em;
+}
+
+.card-title a {
+    color: #000;
+    text-decoration: none !important;
+}
