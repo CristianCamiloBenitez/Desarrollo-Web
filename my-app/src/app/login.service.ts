@@ -12,13 +12,13 @@ export class LoginService {
   constructor(private http: HttpClient,
               private cookies: CookieService) { }
 
-  login(username: string, password: string): Observable<any> {
+  login(user: string, password: string): Observable<any> {
       const headers = new HttpHeaders()
       const body = JSON.stringify({})
       const params = new HttpParams()
-        .set('username', username)
+        .set('user', user)
         .set('password', password)
-      return this.http.post("http://localhost:8083/login", body, {
+      return this.http.post("http://localhost:8081/user/login", body, {
                             params: params
                             });
   }
@@ -29,11 +29,11 @@ export class LoginService {
   getToken() {
     return this.cookies.get("token");
   }
-  setUsername(username: string) {
-    this.cookies.set("username", username);
+  setUser(user: string) {
+    this.cookies.set("user", user);
   }
-  getUsername() {
-    return this.cookies.get("username");
+  getUser() {
+    return this.cookies.get("user");
   }
   logout() {
     this.cookies.deleteAll();

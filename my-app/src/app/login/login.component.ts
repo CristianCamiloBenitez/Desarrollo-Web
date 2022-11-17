@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         data => {
           console.log(data);
           this.loginService.setToken(data.token);
-          this.loginService.setUsername(data.username)
+          this.loginService.setUser(data.username)
           Swal.fire({
             icon: 'success',
             title: 'Inicio de sesión correcto',
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
         error => {
           Swal.fire({
             icon: 'error',
-            title: 'Error al iniciar sesión',
+            title: 'Error',
             text: 'Verifica usuario y/o contraseña',
             confirmButtonColor: '#50504f'
           });

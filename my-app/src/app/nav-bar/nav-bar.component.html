@@ -12,7 +12,19 @@
       </a>
     </div>
   
-    <!-- ng if  Cerrar Sesion-->
+    <div *ngIf="userIsAuth" class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+  
+        <li class="nav-item" style="margin-right:10px">
+          <a class="nav-link">Bienvenido, {{username}}</a>
+        </li>
+  
+        <li class="nav-item" style="margin-right:10px">
+          <a routerLink="/login" class="nav-link" (click)="logout()">Cerrar Sesión</a>
+        </li>
+  
+      </ul>
+    </div>
 </nav>
   
   
