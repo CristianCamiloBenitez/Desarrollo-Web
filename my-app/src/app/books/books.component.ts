@@ -26,7 +26,7 @@ export class BooksComponent implements OnInit {
       editoriales => {
         this.editoriales = editoriales;
       }
-    )
+    );
 
   }
 
@@ -38,5 +38,4 @@ export class BooksComponent implements OnInit {
     }
     return "---"; 
   }
-
 }

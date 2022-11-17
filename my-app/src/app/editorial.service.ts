@@ -11,6 +11,6 @@ export class EditorialService {
   constructor(private http: HttpClient) { }
 
   getEditorials(): Observable<Editorial[]> {
-    return this.http.get<Editorial[]>("http://localhost:8002/editorial/all");
+    return this.http.get<Editorial[]>("http://localhost:8082/editorial/all");
   }
 }

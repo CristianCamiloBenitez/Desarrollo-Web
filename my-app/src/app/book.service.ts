@@ -20,4 +20,14 @@ export class BookService {
       results => this.searchResults.next(results)
     );
   }
+
+  searchByEditorialId(id: number){
+    this.http.get<Book[]>("http://localHost:8080/books/editorial/" + id).subscribe(
+        results => this.searchResults.next(results)
+       );
+}
+
+onResults(){
+    return this.searchResults.asObservable();
+}
 }
