@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         data => {
           console.log(data);
           this.loginService.setToken(data.token);
-          this.loginService.setUser(data.username)
+          this.loginService.setUsername(data.username)
           Swal.fire({
             icon: 'success',
             title: 'Inicio de sesión correcto',
