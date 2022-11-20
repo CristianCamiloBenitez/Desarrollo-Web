@@ -1,4 +1,6 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
+.editorial:hover{
+    cursor: pointer;
+}
 
 html,
 
@@ -7,12 +9,6 @@ body{
     width: 100%;
     background: plum;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-.wrapper {
-    display: table;
-    height: 100%;
-    width: 100%;
 }
 
 .card {
@@ -29,16 +25,21 @@ body{
     display: block;
     overflow: hidden;
 }
-
 .img-card img {
     width: 50%;
     height: 300px;
     object-fit: cover;
 }
 
-.card-content {
+.card-body {
     padding: 15px;
     text-align: left;
+}
+
+.wrapper {
+    display: table;
+    height: 100%;
+    width: 100%;
 }
 
 .card-title {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Book } from './book';
+import { Book } from './books';
 import { BookService } from '../book.service';
 import { Editorial } from '../editorial/editorial';
 import { EditorialService } from '../editorial.service';
@@ -11,31 +11,59 @@ import { EditorialService } from '../editorial.service';
 })
 export class BooksComponent implements OnInit {
 
+  maxPagina: number = 10
+  paginaActual: number = 0
+  numPaginas: number = 0
+  botonesPag: Number[] = []
   books: Book[] = [];
-  editoriales: Editorial[] = [];
-  constructor(private booksService: BookService, private editorialService: EditorialService) { }
+  filterBooks: Book[] = [];
+
+  constructor(private bookService: BookService,
+              private editorialService: EditorialService) { }
 
   ngOnInit(): void {
-    this.booksService.getBooks().subscribe(
-      books => {
-        this.books = books;
+    this.bookService.searchAllBooks();
+    this.bookService.onResults().subscribe(
+      results => {
+        this.books = results;
+        this.numPaginas = Math.ceil(this.books.length / this.maxPagina)
+        this.botonesPag = Array(this.numPaginas).fill(0).map((_, i)=>i+1)
+        this.fillBooksEditorial();
       }
-    );
-
-    this.editorialService.getEditorials().subscribe(
-      editoriales => {
-        this.editoriales = editoriales;
-      }
-    );
-
+    )                           
   }
 
-  getEditorial(id: Number): string {
-    for(let item of this.editoriales) {
-      if(item.id === id) {
-          return item.name;
-      }
-    }
-    return "---"; 
+  /** Busca libros dado un id de editorial
+   * 
+   * @param book 
+   */
+  searchBooksByEditorial(book: Book){
+    this.bookService.searchByEditorialId(book.editorial_id.id)
+  }
+
+  /** Filtra los libros dado una editorial
+   * 
+   */
+  fillBooksEditorial(){
+     for (const book of this.books){
+        this.editorialService.searchById(+book.editorial_id).subscribe(
+          result => {
+            book.editorial_id = result           
+          }
+        )
+     }
+     this.filterBooks = this.books.filter((_,i)=>i>=0 && i<this.maxPagina)
+  }
+
+
+  /** Cambia de página dado un indice
+   * 
+   * @param index 
+   */
+  changePage(index: number){
+    this.paginaActual = index - 1
+    const start = (index - 1) * this.maxPagina
+    const end = start + this.maxPagina
+    this.filterBooks = this.books.filter((_,i)=>i>=start && i<end)
   }
 }

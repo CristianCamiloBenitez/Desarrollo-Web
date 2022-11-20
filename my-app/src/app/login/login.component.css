@@ -1,7 +1,33 @@
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
 html,
-body{
-    background: greenyellow;
+
+.custom-form {
+  min-width: 300px;
+  max-width: 60%;
+  margin: 0px auto;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 2rem 3rem;
+  margin: auto;
+  border-radius: 2.5rem;
+  background-color: #3a92d5;
+  box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #ffffff;
+  color: black;
+  margin-top: 10rem;
+}
+.custom-form input {
+  display: block;
+  width: 100%;
+  box-shadow: inset -5px -5px 15px rgba(255, 255, 255, 0.8), inset 5px 5px 10px
+  rgba(0, 0, 0, 0.1);
+}
+.custom-form button {
+  text-transform: uppercase;
+  color: black;
+  font-weight: bold;
+  background-color: rgb(30, 203, 87);
+  width: 100%;
+  display: block;
+  cursor: pointer;
 }

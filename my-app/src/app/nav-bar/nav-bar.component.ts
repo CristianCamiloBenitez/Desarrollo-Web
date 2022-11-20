@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../login.service';
-import Swal from 'sweetalert2';
+import { Component, importProvidersFrom, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { BookService } from '../book.service';
+import { Book } from '../books/books';
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,33 +10,31 @@ import Swal from 'sweetalert2';
 })
 export class NavBarComponent implements OnInit {
 
-  userIsAuth: boolean = false;
-  username: string="";
-  constructor(private loginService: LoginService) {
-    loginService.getStatus.subscribe(name => this.checkAuth());
-   }
+  result: string ='';
+  books: Book[] = [];
+  constructor(private bookService: BookService) { }
 
   ngOnInit(): void {
-    this.checkAuth();
   }
 
-  checkAuth(): void {
-    if(this.loginService.getToken()){
-      this.userIsAuth = true;
-      this.username = this.loginService.getUser();
+  /** Filtra en la barra de búsqueda
+   * 
+   * @param searchForm 
+   */
+  search(searchForm: NgForm){
+    if(searchForm.value.filter === ''){
+      alert("Inserte algo en la búsqueda") 
     }
-    else {
-      this.userIsAuth = false;
-      this.username = "";
+    else{
+      this.bookService.searchByName(searchForm.value.filter);
     }
   }
 
-  logout(): void {
-    this.loginService.logout();
-    Swal.fire({
-      icon: 'success',
-      title: 'Se cerro la sesión',
-      confirmButtonColor: '#50504f'
-    });
+  /** Actualiza y muestra la lista de libros
+   * 
+   */
+  restartBooks(): void{
+    this.bookService.searchAllBooks();
+    this.result = '';
   }
 }

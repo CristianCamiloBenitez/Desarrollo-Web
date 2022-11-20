@@ -1,38 +1,26 @@
 <div class="login">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <h2 class="fw-bold mb-2 text-uppercase">Iniciar Sesión</h2>
-      <form class="custom-form" [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
-        <h2>Login</h2>
-    
-        <div class="form-outline form-white mb-4">
-          <input
-          type="text"
-          formControlName="login"
-          name="login"
-          placeholder="Usuario"
-          required="required"
-          class="form-control form-control-lg"
-          />
-    
-        </div>
-        
-        <div class="form-outline form-white mb-4">
-          <input
-          type="password"
-          formControlName="password"
-          name="password"
-          placeholder="Contraseña"
-          required="required"
-          class="form-control form-control-lg"
-          />
-    
-        </div>
-        
-        <button type="submit">Ingresar</button>
-      </form>
+  <form class="custom-form" [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+    <h1>Inicio de Sesión</h1>
+
+    <div class="form-outline form-white mb-4">
+      <input
+      type="text"
+      formControlName="login"
+      name="login"
+      placeholder="Usuario"
+      required="required"
+    />
+    </div>
+    <div class="form-outline form-white mb-4">
+      <input
+      type="password"
+      formControlName="password"
+      name="password"
+      placeholder="Contraseña"
+      required="required"
+    />
     </div>
     
-    </div>
-  </div>
-    
+    <button type="submit">Ingresar</button>
+  </form>
+</div>

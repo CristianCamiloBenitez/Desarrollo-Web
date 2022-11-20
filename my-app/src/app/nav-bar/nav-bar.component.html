@@ -1,30 +1,32 @@
-<nav class="navbar navbar-dark bg-dark ">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img src="assets/img/icon-books.png" alt="" width="30" height="24">Libreria
-      </a>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Buscar</button>
-      </form>
-      <a routerLink="/login" class="btn btn-primary" role="button">
-        Iniciar Sesión
-      </a>
-    </div>
-  
-    <div *ngIf="userIsAuth" class="collapse navbar-collapse justify-content-end" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-  
-        <li class="nav-item" style="margin-right:10px">
-          <a class="nav-link">Bienvenido, {{username}}</a>
-        </li>
-  
-        <li class="nav-item" style="margin-right:10px">
-          <a routerLink="/login" class="nav-link" (click)="logout()">Cerrar Sesión</a>
-        </li>
-  
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/" (click)="restartBooks()">
+      <img src="assets/img/icon-books.png" alt="" width="30" height="30"> Libreria Nacional
+    </a>
+    <form class="d-flex" role="search" #searchForm="ngForm" (ngSubmit)="search(searchForm)" >
+      <div class="input-group" id="show_hide_password">
+        <input
+        type="search" class="form-control me-2" name="filter" #filter="ngModel"
+        placeholder="Buscar Libro" aria-label="Search"
+        [(ngModel)]="result"
+      />
+      <button type="submit" class="btn btn-outline-success">
+        Buscar
+      </button>
+      </div>
+    </form>
+    <div class="dropdown">
+      <button class="btn btn-secondary" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        Sesión
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><a class="dropdown-item" href="#" routerLink="/login">Login</a></li>
+        <li><a class="dropdown-item" href="#">LogOut</a></li>
+        
       </ul>
+      <button class="btn btn-secondary" href="#" routerLink="/users">
+        Users
+      </button>
     </div>
+  </div>
 </nav>
-  
-  

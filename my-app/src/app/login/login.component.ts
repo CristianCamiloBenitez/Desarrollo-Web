@@ -23,36 +23,39 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /** login con username y password 
+   * 
+   */
   onSubmit(): void {
 
       let userParam: string;
       let passParam: string;
       userParam = ''+this.checkoutForm.value.login;
       passParam = ''+this.checkoutForm.value.password;
-      this.loginService.login(userParam, passParam).subscribe(
-        data => {
-          console.log(data);
-          this.loginService.setToken(data.token);
-          this.loginService.setUser(data.username)
-          Swal.fire({
-            icon: 'success',
-            title: 'Inicio de sesión correcto',
-            text: 'Bienvenido, ' + data.username,
-            confirmButtonColor: '#50504f'
-          });
-          this.router.navigateByUrl('/');
-          this.loginService.getStatus.emit("login");
-        },
-        error => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Verifica usuario y/o contraseña',
-            confirmButtonColor: '#50504f'
-          });
-        });
-  
+      console.log('FormValue:', this.checkoutForm.value);
+      console.log('Login:', this.checkoutForm.value.login);
+      console.log('Password:', this.checkoutForm.value.password);
+      this.loginService.login(userParam, passParam).subscribe({
+                                      next: (data) => {
+                                                        console.log(data);
+                                                        this.loginService.setToken(data.token);
+                                                        Swal.fire({
+                                                          icon: 'success',
+                                                          title: 'Inicio de sesión correcto',
+                                                          text: 'Bienvenido',
+                                                          confirmButtonColor: '#50504f'
+                                                        });
+                                                        this.router.navigateByUrl('/'); 
+                                                      },
+                                                      error: (err) =>{
+                                                        Swal.fire({
+                                                          icon: 'error',
+                                                          title: 'Error',
+                                                          text: 'Usuario o contraseña erronea',
+                                                          confirmButtonColor: '#50504f'
+                                                        });
+                                                      },
+      });
       this.checkoutForm.reset();
   }
-
 }

@@ -1,22 +1,26 @@
-<h1>Lista de Libros :D </h1>
-<div class="content">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-4" *ngFor="let book of books">
-                <div class="card">
-                    <a class="img-card">
-                        <img src={{book.image_url}} />
-                    </a>
-                    <div class="card-content">
-                        <h4 class="card-title">
-                            <a> {{book.name}} </a>
-                        </h4> 
-                        <strong class="">ID: </strong> {{book.id}} <br>
-                        <strong class=""> Editorial: </strong> {{getEditorial(book.editorial_id)}} <br>
-                        <strong class=""> Autor</strong> {{book.author}} <br>
-                        <p class=""> {{book.description}} </p>
+<h1 class="text-center">Lista de Libros :D</h1>
+<div class="container mt-4">
+    <button type="button" class="btn btn-dark" routerLink="/crearLibro">Agregar libro</button>
+    <div class="row">
+        <div *ngFor="let book of filterBooks" class="col-xs-20 col-sm-4">
+            <div class="card h-80">
+                <img [src]="book.image_url" class="img-card" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{book.name}}</h5>
+                    <p>
+                        <strong class=""> Editorial: </strong> <a (click)="searchBooksByEditorial(book)" class="badge text-bg-warning editorial" [text]="book.editorial_id.name"></a>
+                    </p>
+                    <strong class=""> Descripción: </strong> <p class="card-text">{{book.description}}</p>
+                </div>
+                <div>
+                    <div class="card-footer text-muted d-flex">
+                        <a [routerLink]="['/modificarLibro/', book.id]" class="btn btn-dark me-2">Modificar</a>
                     </div>
                 </div>
             </div>
-    </div>    
+        </div>
+    </div>
+    <div class="text-center">
+        <button *ngFor="let boton of botonesPag" (click)="changePage(+boton)" class="me-3">{{boton}}</button>
+    </div>
 </div>
